@@ -1,0 +1,1 @@
+export const URL_MAIN = 'http://e-campus.esy.es/e-campus/recruiter.php';
