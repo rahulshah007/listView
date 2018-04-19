@@ -4,6 +4,7 @@ import {
   View,
   Text,
   StyleSheet,
+  ActivityIndicator,
   TouchableOpacity,
   Alert,
   ScrollView,
@@ -19,8 +20,8 @@ import {
   Header,
   Thumbnail,
   Icon,
+  Spinner,
   Body,
-  ActivityIndicator,
   Item,
   Card,
   CardItem,
@@ -33,15 +34,29 @@ import RelatedItemViewCardItem from "../../components/customComponents/RelatedIt
 import axios from "axios";
 // create a component
 class Home extends Component {
-  state = { movieList: [], isLoding: false, isLoad: false };
+  state = { movieList: [], isLoading: true, isLoad: false };
   constructor(props) {
     super(props);
+  }
+
+  renderLoader() {
+    if (this.state.isLoading) {
+      return (
+        <View style={{ flex: 1, paddingTop: 20 }}>
+          <Spinner />
+        </View>
+      );
+    } else {
+      return <Content>{this.renderRecutier()}</Content>;
+    }
   }
 
   componentDidMount() {
     axios.get("https://api.androidhive.info/json/movies.json").then(response =>
       this.setState({
-        movieList: response.data
+        movieList: response.data,
+        isLoading: false,
+        isLoad: true
       })
     );
   }
@@ -138,7 +153,6 @@ class Home extends Component {
           </View>
         </View>
 
-        {/* Profile info page */}
         <Content style={styles.profileNameView}>
           <View
             style={{
@@ -302,7 +316,8 @@ class Home extends Component {
                 Related to item you've viewed
               </Text>
             </CardItem>
-            {this.renderRecutier()}
+            <CardItem>{this.renderLoader()}</CardItem>
+            {/* {this.renderRecutier()} */}
           </Card>
         </Content>
       </Container>

@@ -6,7 +6,7 @@ import { ActivityIndicator } from "react-native";
 // create a component
 const Spinner = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <ActivityIndicator />
     </View>
   );
@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#2c3e50"
   }
 });
 
