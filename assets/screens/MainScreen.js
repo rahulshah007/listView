@@ -37,6 +37,7 @@ class MainScreen extends Component {
 }
 
 CustomDrawerContentComponent = props => {
+
   return (
     <Container>
       <Header
